@@ -2,7 +2,7 @@
 
 This is a Game of Thrones inspired REST API game. You are responsible to create the engine of the game.
 
-## Your tasks
+## My tasks
 
 1. Implement the endpoints in **./src/api.js** file with the most suitable code for players and objects management REST API. You will find detailed instructions in this file.
 2. Write some tests for your code. Use test folder for this purpose.
@@ -12,15 +12,15 @@ This is a Game of Thrones inspired REST API game. You are responsible to create 
 
 You have to create endpoints (as many as you consider) to support the following functionality:
 
-1. List all players.
-2. Create player: adds a new player to data source.
-3. Get player by id: returns the player for the given id.
-4. Arm a player with an object in its bag.
-5. Kill a player: sets player health to 0.
-6. Create object: adds a new object to data source.
-7. Get object by id: returns the object for the given id.
-8. Upgrade object: increase/descrease the value of the object given by id with a new value
-9. Destroy object: remove an object from available objects
+1. List all players. GET
+2. Create player: adds a new player to data source. POST 
+3. Get player by id: returns the player for the given id. GET
+4. Arm a player with an object in its bag. POST
+5. Kill a player: sets player health to 0. DELETE
+6. Create object: adds a new object to data source. POST
+7. Get object by id: returns the object for the given id. GET
+8. Upgrade object: increase/descrease the value of the object given by id with a new value PUT
+9. Destroy object: remove an object from available objects DELETE
 
 **Bonus:**
 
