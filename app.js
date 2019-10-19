@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const consola = require("consola");
 const router = require("./src/router.js");
-const api = require("./src/api.js");
 
 const app = express();
 const host = process.env.HOST || "0.0.0.0";
@@ -21,10 +20,10 @@ async function run() {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.use("/", router);
-  app.use("/api", api);
+  app.use("/api", require("./src/api.js"));
 
   app.use((req, res, next) => {
-    res.send('Hello from app.js')
+    res.send('Testing! Hello from App.js')
     next();
   });
 
