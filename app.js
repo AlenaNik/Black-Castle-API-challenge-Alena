@@ -22,8 +22,8 @@ async function run() {
   app.use("/", router);
   app.use("/api", require("./src/api.js"));
 
-  app.use((req, res, next) => {
-    res.send('Testing! Hello from App.js')
+  app.use((err, req, res, next) => {
+    res.send('I\'m from middleware');
     next();
   });
 
