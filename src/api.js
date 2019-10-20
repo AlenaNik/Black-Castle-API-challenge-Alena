@@ -2,26 +2,31 @@ const { Router } = require("express");
 const api = Router();
 // const _ = require('lodash');
 
-// This will be your data source
-const players = [
-  { id: 1, name: "Jon Snow", age: 23, health: 100, bag: [1] },
-  { id: 2, name: "Littlefinger", age: 35, health: 100, bag: [2] },
-  { id: 3, name: "Daenerys Targaryen", age: 20, health: 100, bag: [3] },
-  { id: 4, name: "Samwell Tarly", age: 18, health: 100, bag: [4] }
-];
-const objects = [
-  { id: 1, name: "spoon", value: -1 },
-  { id: 2, name: "knife", value: -10 },
-  { id: 3, name: "sword", value: -20 },
-  { id: 4, name: "potion", value: +20 }
-];
-
+// Data Source
+const database = {
+  players: [
+    { id: 1, name: "Jon Snow", age: 23, health: 100, bag: [1] },
+    { id: 2, name: "Littlefinger", age: 35, health: 100, bag: [2] },
+    { id: 3, name: "Daenerys Targaryen", age: 20, health: 100, bag: [3] },
+    { id: 4, name: "Samwell Tarly", age: 18, health: 100, bag: [4] }
+  ],
+  objects: [
+    { id: 1, name: "spoon", value: -1 },
+    { id: 2, name: "knife", value: -10 },
+    { id: 3, name: "sword", value: -20 },
+    { id: 4, name: "potion", value: +20 }
+  ],
+  users: [
+    { id: 1, name: "Alena", email: "alena@gmail.com", password: "123", entries: 0 },
+    { id: 2, name: "Sally", email: "sally@gmail.com", password: "124", entries: 2 }
+  ]
+};
 
 // Setting up my routes
 
 // ROUTE 01: /api/players               Returns a list of all players
 api.get("/players", function(req, res) {
-  res.status(200).json(players);
+  res.status(200).json(database.players);
 });
 
 // ROUTE 02: /api/player             Create player: adds a new player to data source.
@@ -30,11 +35,12 @@ api.post("/player", function(req, res, next) {
     res.send(player)
   }).catch(next);
 });
+
 // ROUTE 03: /api/players:id            Get player by id: returns the player for the given id
-api.get("/players/:id", (req, res, next) => {
- const { id } = req.params.id;
+api.get("/player/:id", (req, res, next) => {
+ const { id } = req.params;
  let found = false;
-  players.forEach(player => {
+  database.players.forEach(player => {
     if (player.id === id) {
       found = true;
       return res.json(player)
@@ -70,7 +76,7 @@ api.post("/object", function(req, res, next) {
 
 // ROUTE 07: /api/objects           Get a list of all objects
 api.get("/objects", function(req, res) {
-  res.status(200).json(objects);
+  res.status(200).json(database.objects);
 });
 
 // ROUTE 08: /api/objects:id            Get object by id: returns the object for the given id
@@ -114,6 +120,9 @@ api.delete("/api/objects/:id", (req, res, next) => {
   console.log("Delete item with id: ", objectId);
   res.json(objects.filter(item => item.id !== objectId));
 });
-
+// Bonus Basic sign-in
+api.post('/signin', (req, res) => {
+  res.json('signing-in')
+})
 
 module.exports = api;
