@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const api = Router();
+// const _ = require('lodash');
 
 // This will be your data source
 const players = [
@@ -15,9 +16,104 @@ const objects = [
   { id: 4, name: "potion", value: +20 }
 ];
 
-// EXAMPLE ENDPOINT: LIST ALL OBJECTS
+
+// Setting up my routes
+
+// ROUTE 01: /api/players               Returns a list of all players
+api.get("/players", function(req, res) {
+  res.status(200).json(players);
+});
+
+// ROUTE 02: /api/player             Create player: adds a new player to data source.
+api.post("/player", function(req, res, next) {
+  players.push(req.body).then(function(player) {
+    res.send(player)
+  }).catch(next);
+});
+// ROUTE 03: /api/players:id            Get player by id: returns the player for the given id
+api.get("/players/:id", (req, res, next) => {
+ const { id } = req.params.id;
+ let found = false;
+  players.forEach(player => {
+    if (player.id === id) {
+      found = true;
+      return res.json(player)
+    }
+  })
+  if (!found) {
+    res.status(404).json('not found');
+  }
+});
+
+
+// ROUTE 04: /api/players/:id/inside-bag          Arm a player with an object in its bag.(open the bag)
+api.get("/players/:id/inside-bag", (req, res) => {
+  const { id } = req.body;
+  players.forEach(player => {
+    if (player.id === id) {
+      return res.json(player.bag)
+    }
+  })
+});
+
+// ROUTE 05: /api/players/health         Update player health to 0 (Kill a player)
+api.patch("/players/health", (req, res) => {
+
+});
+
+// ROUTE 06: /api/object           Adds a new object to data source
+api.post("/object", function(req, res, next) {
+  objects.push(req.body).then(function(object) {
+    res.send(object)
+  }).catch(next);
+});
+
+// ROUTE 07: /api/objects           Get a list of all objects
 api.get("/objects", function(req, res) {
+  res.status(200).json(objects);
+});
+
+// ROUTE 08: /api/objects:id            Get object by id: returns the object for the given id
+api.get("/objects/:id", (req, res) => {
+  const { id } = req.body;
+  let found = false;
+  objects.forEach(object => {
+    if (object.id === id) {
+      found = true;
+      return res.json(object)
+    }
+  });
+  if (!found) {
+    res.status(404).json('not found');
+  }
+});
+
+
+// ROUTE 10: /api/objects/id     Update value of an object
+api.patch("/objects/:id", (req, res, next) => {
+  const objectId = req.params.id;
+  const object = req.body;
+  console.log("Editing item: ", objectId, " to be ", object);
+  const updatedListOfObjects = [];
+  // loop through list to find and replace one item
+  objects.forEach(oldObject => {
+    if (oldObject.id === objectId) {
+      updatedListOfObjects.push(object);
+    } else {
+      console.log('Doesn\'t exist');
+    }
+  });
+  // replace old list with new one
+  objects = updatedListOfObjects;
   res.json(objects);
 });
+
+// ROUTE 11: /api/objects/:id          Delete an object
+api.delete("/api/objects/:id", (req, res, next) => {
+  const objectId = req.params;
+  console.log("Delete item with id: ", objectId);
+  res.json(objects.filter(item => item.id !== objectId));
+});
+
 
 module.exports = api;

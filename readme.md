@@ -15,8 +15,8 @@ You have to create endpoints (as many as you consider) to support the following 
 1. List all players. GET
 2. Create player: adds a new player to data source. POST 
 3. Get player by id: returns the player for the given id. GET
-4. Arm a player with an object in its bag. POST
-5. Kill a player: sets player health to 0. DELETE
+4. Arm a player with an object in its bag. GET 
+5. Kill a player: sets player health to 0. PUT
 6. Create object: adds a new object to data source. POST
 7. Get object by id: returns the object for the given id. GET
 8. Upgrade object: increase/descrease the value of the object given by id with a new value PUT
