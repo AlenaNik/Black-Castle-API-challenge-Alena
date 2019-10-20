@@ -51,23 +51,18 @@ api.get("/player/:id", (req, res) => {
   database.players.forEach(player => {
     if (player.id === id) {
       found = true;
-      return res.json(player)
+      return res.json(player);
     }
   })
   if (!found) {
-    res.status(404).json('not found');
+    res.status(400).json('It\'s not found');
   }
 });
 
 
-// ROUTE 04: /api/players/:id/inside-bag          Arm a player with an object in its bag.(open the bag)
-api.get("/players/:id/inside-bag", (req, res) => {
-  const { id } = req.body;
-  players.forEach(player => {
-    if (player.id === id) {
-      return res.json(player.bag)
-    }
-  })
+// ROUTE 04: /api/players/bag          Arm a player with an object in its bag.(open the bag)
+api.get("/player/bag", (req, res) => {
+
 });
 
 // ROUTE 05: /api/players/health         Update player health to 0 (Kill a player)
