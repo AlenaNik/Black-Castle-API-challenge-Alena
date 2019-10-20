@@ -19,6 +19,8 @@ const database = {
   users: [
     { id: 1, name: "Alena", email: "alena@gmail.com", password: "123", entries: 0 },
     { id: 2, name: "Sally", email: "sally@gmail.com", password: "124", entries: 2 }
+    // since the auth structure is a bonus and it's basic, I haven't used bcrypt or JWT for auth and store hash
+    // or password + salt to my database, that I would normally do :)
   ]
 };
 
@@ -30,14 +32,20 @@ api.get("/players", function(req, res) {
 });
 
 // ROUTE 02: /api/player             Create player: adds a new player to data source.
-api.post("/player", function(req, res, next) {
-  players.push(req.body).then(function(player) {
-    res.send(player)
-  }).catch(next);
+api.post("/player", function(req, res) {
+  const { id, name, age, health, bag } = req.body;
+  database.players.push({
+    id: id,
+    name: name,
+    age: age,
+    health: health,
+    bag: [bag],
+  });
+  res.json(database.players[database.players.length-1]);
 });
 
 // ROUTE 03: /api/players:id            Get player by id: returns the player for the given id
-api.get("/player/:id", (req, res, next) => {
+api.get("/player/:id", (req, res) => {
  const { id } = req.params;
  let found = false;
   database.players.forEach(player => {
@@ -68,11 +76,16 @@ api.patch("/players/health", (req, res) => {
 });
 
 // ROUTE 06: /api/object           Adds a new object to data source
-api.post("/object", function(req, res, next) {
-  objects.push(req.body).then(function(object) {
-    res.send(object)
-  }).catch(next);
+api.post("/object", function(req, res) {
+  const { id, name, value } = req.body;
+  database.objects.push({
+    id: id,
+    name: name,
+    value: value
+  });
+  res.json(database.objects[database.objects.length-1]);
 });
+
 
 // ROUTE 07: /api/objects           Get a list of all objects
 api.get("/objects", function(req, res) {
@@ -120,9 +133,32 @@ api.delete("/api/objects/:id", (req, res, next) => {
   console.log("Delete item with id: ", objectId);
   res.json(objects.filter(item => item.id !== objectId));
 });
-// Bonus Basic sign-in
+
+// ROUTE 12: POST /api/signin          Sign-in to a database from front-end form
 api.post('/signin', (req, res) => {
-  res.json('signing-in')
-})
+  if (req.headers.email === database.users[0].email
+  && req.headers.password === database.users[0].password) {
+    res.json('Success!');
+  } else {
+    res.status(400).json('Please, try again');
+  }
+});
+// ROUTE 13: POST /api/register          Register to a database from front-end form
+api.post('/register', (req, res) => {
+  const {email, name, password } = req.body;
+    database.users.push({
+      id: 3,
+      name: name,
+      email: email,
+      password: password,
+      entries: 0
+    });
+  res.json(database.users[database.users.length-1]);
+});
+
+// ROUTE 14: GET /api/users        Sign-in to a database from front-end form
+api.get('/users', (req, res) => {
+  res.status(200).json(database.users);
+});
 
 module.exports = api;
