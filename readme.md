@@ -4,44 +4,30 @@ This is a Game of Thrones inspired REST API game. You are responsible to create 
 
 ## My tasks
 
-1. Implement the endpoints in **./src/api.js** file with the most suitable code for players and objects management REST API. You will find detailed instructions in this file.
-2. Write some tests for your code. Use test folder for this purpose.
-3. Answer all commented questions you find in the code.
+1. Implement the endpoints in **./src/api.js** file with the most suitable code for players and objects management REST API. You will find detailed instructions in this file. **Done**
+2. Write some tests for your code. Use test folder for this purpose. **Done**
+3. Answer all commented questions you find in the code. **Done**
 
 ### Required endpoints
 
 You have to create endpoints (as many as you consider) to support the following functionality:
 
-1. List all players. GET
-2. Create player: adds a new player to data source. POST 
-3. Get player by id: returns the player for the given id. GET
-4. Arm a player with an object in its bag. GET 
-5. Kill a player: sets player health to 0. PUT
-6. Create object: adds a new object to data source. POST
-7. Get object by id: returns the object for the given id. GET
-8. Upgrade object: increase/descrease the value of the object given by id with a new value PUT
-9. Destroy object: remove an object from available objects DELETE
+1. List all players. (GET) **Done**
+2. Create player: adds a new player to data source. (POST) **Done**
+3. Get player by id: returns the player for the given id. (GET) **Done**
+4. Arm a player with an object in its bag. (GET) 
+5. Kill a player: sets player health to 0. (PUT) **Done**
+6. Create object: adds a new object to data source. (POST) **Done**
+7. Get object by id: returns the object for the given id. (GET) **Done**
+8. Upgrade object: increase/descrease the value of the object given by id with a new value (PUT)
+9. Destroy object: remove an object from available objects (DELETE) **Almost done :)**
 
 **Bonus:**
 
-1. Include a postman collection in utils folder to test the app.
-2. Add basic authentication to /api path.
-3. Implement attack player endpoint: one player attacks another player using an object from its bag. Adjust health accordingly
-4. Implement steal bag from player endpoint: one player steals everything from another player. Bag objects are moved from one player to another.
-5. Implement resurect player endpoint: bring back to live a dead player using its id.
-6. Implement use object endpoint: a player use an object against another player or itself.
-7. Are you having fun? You are free to extend the game with new functionality.
-   YOUR OWN METHOD: ...
+1. Include a postman collection in utils folder to test the app. **Done**
+2. Add basic authentication to /api path. **Done**
 
-## Game Rules
-
-1. You are free to implement as many endpoints as you need.
-2. You can use inline comments, git commits or readme file to justify your decissions.
-3. Bag size is unlimited.
-4. Bear in mind RESTful API concepts.
-5. One object can be used by multiple players
-
-**Use your own criteria for any rule that is not clear. Justify it.**
+**It was the first time for me building an API with REST API methods. I learned a lot and enjoyed the process of applying knowlendge into practice (throught, I haven't make every route working correctly, I'm planning to be back to code and finish it)**
 
 ## How to run the application using a local server
 
