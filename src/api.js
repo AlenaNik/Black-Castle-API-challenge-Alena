@@ -46,7 +46,6 @@ api.post("/player", function(req, res) {
 
 // ROUTE 03: /api/players:id            Get player by id: returns the player for the given id
 api.get("/player/:id", (req, res) => {
-  console.log(req.params);
  const { id } = Number(req.params);
  let found = false;
   database.players.forEach(player => {
@@ -105,7 +104,7 @@ api.get("/object/:id", (req, res) => {
         found = true;
         return res.json(object);
       }
-    })
+    });
     if (!found) {
       res.status(400).json('It\'s not found');
     }
@@ -131,15 +130,17 @@ api.put("/objects/:id", (req, res ) => {
   });
   // replace old list with new one
   database.objects = updatedListOfObjects;
-  res.json(database.objects);
+  res.json(updatedListOfObjects);
 });
 
 // ROUTE 11: /api/objects/:id          Delete an object
-api.delete("/api/objects/:id", (req, res, next) => {
+api.delete("/api/objects/:id", (req, res) => {
   const objectId = Number(req.params);
   console.log("Delete item with id: ", objectId);
-  res.json(database.objects.filter(item => item.id !== objectId));
+  res.json(database.objects.splice(database.objects.findIndex(item => item.id == objectId),1));
 });
+
+
 
 // ROUTE 12: POST /api/signin          Sign-in to a database from front-end form
 api.post('/signin', (req, res) => {
