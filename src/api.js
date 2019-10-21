@@ -46,7 +46,8 @@ api.post("/player", function(req, res) {
 
 // ROUTE 03: /api/players:id            Get player by id: returns the player for the given id
 api.get("/player/:id", (req, res) => {
- const { id } = req.params;
+  console.log(req.params);
+ const { id } = Number(req.params);
  let found = false;
   database.players.forEach(player => {
     if (player.id === id) {
@@ -65,9 +66,16 @@ api.get("/player/bag", (req, res) => {
 
 });
 
-// ROUTE 05: /api/players/health         Update player health to 0 (Kill a player)
-api.patch("/players/health", (req, res) => {
-
+// ROUTE 05: /api/:id/health         Update player health to 0 (Kill a player)
+api.patch("/player/:id/health", (req, res) => {
+  //   const { id } = req.params;
+  //   const { health } = req.headers;
+  // database.players.forEach(player => {
+  //   if (player.id === id) {
+  //     database.players.push({
+  //       health: health }
+  //  return res.json(database.players.id);
+  //     });
 });
 
 // ROUTE 06: /api/object           Adds a new object to data source
@@ -87,30 +95,34 @@ api.get("/objects", function(req, res) {
   res.status(200).json(database.objects);
 });
 
-// ROUTE 08: /api/objects:id            Get object by id: returns the object for the given id
-api.get("/objects/:id", (req, res) => {
-  const { id } = req.body;
-  let found = false;
-  objects.forEach(object => {
-    if (object.id === id) {
-      found = true;
-      return res.json(object)
+// ROUTE 08: /api/object/:id            Get object by id: returns the object for the given id
+api.get("/object/:id", (req, res) => {
+    console.log(req.params);
+    const { id } = Number(req.params);
+    let found = false;
+    database.players.forEach(object => {
+      if (object.id === id) {
+        found = true;
+        return res.json(object);
+      }
+    })
+    if (!found) {
+      res.status(400).json('It\'s not found');
     }
-  });
-  if (!found) {
-    res.status(404).json('not found');
-  }
 });
 
 
 // ROUTE 10: /api/objects/id     Update value of an object
-api.patch("/objects/:id", (req, res, next) => {
-  const objectId = req.params.id;
+api.put("/objects/:id", (req, res ) => {
+  const objectId = Number(req.params.id);
   const object = req.body;
   console.log("Editing item: ", objectId, " to be ", object);
   const updatedListOfObjects = [];
+  console.log(updatedListOfObjects);
   // loop through list to find and replace one item
-  objects.forEach(oldObject => {
+  database.objects.forEach(oldObject => {
+    console.log(oldObject);
+    console.log(objectId);
     if (oldObject.id === objectId) {
       updatedListOfObjects.push(object);
     } else {
@@ -118,15 +130,15 @@ api.patch("/objects/:id", (req, res, next) => {
     }
   });
   // replace old list with new one
-  objects = updatedListOfObjects;
-  res.json(objects);
+  database.objects = updatedListOfObjects;
+  res.json(database.objects);
 });
 
 // ROUTE 11: /api/objects/:id          Delete an object
 api.delete("/api/objects/:id", (req, res, next) => {
-  const objectId = req.params;
+  const objectId = Number(req.params);
   console.log("Delete item with id: ", objectId);
-  res.json(objects.filter(item => item.id !== objectId));
+  res.json(database.objects.filter(item => item.id !== objectId));
 });
 
 // ROUTE 12: POST /api/signin          Sign-in to a database from front-end form
