@@ -59,7 +59,6 @@ api.get("/player/:id", (req, res) => {
   }
 });
 
-
 // ROUTE 04: /api/players/bag          Arm a player with an object in its bag.(open the bag)
 api.get("/player/bag", (req, res) => {
 
@@ -87,7 +86,6 @@ api.post("/object", function(req, res) {
   });
   res.json(database.objects[database.objects.length-1]);
 });
-
 
 // ROUTE 07: /api/objects           Get a list of all objects
 api.get("/objects", function(req, res) {
@@ -139,8 +137,6 @@ api.delete("/api/objects/:id", (req, res) => {
   console.log("Delete item with id: ", objectId);
   res.json(database.objects.splice(database.objects.findIndex(item => item.id == objectId),1));
 });
-
-
 
 // ROUTE 12: POST /api/signin          Sign-in to a database from front-end form
 api.post('/signin', (req, res) => {

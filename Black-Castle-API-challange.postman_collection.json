@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "59892ccd-1452-4fb0-9333-79f19b13c414",
+		"name": "Black-Castle-API-challange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "{{url}}/api/players",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9250bd37-84d5-4c52-9416-31075c6dd105",
+								"exec": [
+									"pm.test(\"Payload must be valid and have a body\", function () { ",
+									"     pm.response.to.be.ok; ",
+									"     pm.response.to.be.withBody; ",
+									"     pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/players",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"players"
+							]
+						},
+						"description": "Getting a list of players"
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"id\": 6, \n\t\"name\": \"Alena Smith\", \n\t\"age\": 23, \n\t\"health\": 200, \n\t\"bag\": [\n        4\n    ]\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/player",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"player"
+							]
+						},
+						"description": "Post a new player to a database\n"
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/players/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/players/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"players",
+								"1"
+							]
+						},
+						"description": "Getting a player by it's ID"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Objects",
+			"item": [
+				{
+					"name": "{{url}}/api/objects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9250bd37-84d5-4c52-9416-31075c6dd105",
+								"exec": [
+									"pm.test(\"Payload must be valid and have a body\", function () { ",
+									"     pm.response.to.be.ok; ",
+									"     pm.response.to.be.withBody; ",
+									"     pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/objects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/object",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"id\": 4, \"name\": \"carrot\", \"value\": -2 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/object",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"object"
+							]
+						},
+						"description": "Posting a new object to a database"
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/object/?id=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/object/?id=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"object",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Getting object by an id"
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/objects/2",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\"name\": \"spoon\", \"value\": -1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/objects/2?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"objects",
+								"2"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Update value of an object"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "{{url}}/api/signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9250bd37-84d5-4c52-9416-31075c6dd105",
+								"exec": [
+									"pm.test(\"Payload must be valid and have a body\", function () { ",
+									"     pm.response.to.be.ok; ",
+									"     pm.response.to.be.withBody; ",
+									"     pm.response.to.be.json; ",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"alena@gmail.com\", \"password\": \"123\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\"id\": 4, \n\"name\": \"John\", \n\"email\": \"john@gmail.com\", \n\"password\": \"125\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Register route"
+					},
+					"response": []
+				},
+				{
+					"name": "{{url}}/api/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get all users"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "99ab6ae7-c332-4e41-8d0a-ea6b73200c4a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8b54ddb-f381-43e6-8033-0d0b0302309a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
