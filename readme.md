@@ -1,6 +1,6 @@
 # REST API implementation
 
-This is a Game of Thrones inspired REST API game. You are responsible to create the engine of the game.
+**It was the first time for me building an API with REST API methods. I learned a lot and enjoyed the process of applying knowlendge into practice (throught, I haven't make every route working correctly, I'm planning to be back to code and finish it)**
 
 ## My tasks
 
@@ -26,8 +26,6 @@ You have to create endpoints (as many as you consider) to support the following 
 
 1. Include a postman collection in utils folder to test the app. **Done**
 2. Add basic authentication to /api path. **Done**
-
-**It was the first time for me building an API with REST API methods. I learned a lot and enjoyed the process of applying knowlendge into practice (throught, I haven't make every route working correctly, I'm planning to be back to code and finish it)**
 
 ## How to run the application using a local server
 
